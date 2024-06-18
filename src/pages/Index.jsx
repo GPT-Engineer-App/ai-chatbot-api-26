@@ -3,9 +3,23 @@ import { Container, VStack, Input, Button, Text, Box, useColorMode, IconButton }
 import { FaSun, FaMoon, FaPaperPlane } from "react-icons/fa";
 import axios from "axios";
 
+const IdeaManagementTool = ({ ideas }) => (
+  <Box width="100%" p={4} border="1px solid" borderColor="gray.200" borderRadius="md">
+    {ideas.map((idea, index) => (
+      <Box key={index} mb={4}>
+        <Text fontWeight="bold">{idea.name}</Text>
+        <Text>Type of Business: {idea.type}</Text>
+        <Text>Monetization: {idea.monetization}</Text>
+        <Text>Domain: {idea.domain}</Text>
+      </Box>
+    ))}
+  </Box>
+);
+
 const Index = () => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
+  const [ideas, setIdeas] = useState([]);
   const { colorMode, toggleColorMode } = useColorMode();
 
   const handleSendMessage = async () => {
@@ -46,7 +60,7 @@ const Index = () => {
           ))}
         </Box>
         <Input
-          placeholder="describe your idea"
+          placeholder="Describe your idea"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
@@ -54,6 +68,7 @@ const Index = () => {
         <Button rightIcon={<FaPaperPlane />} colorScheme="blue" onClick={handleSendMessage}>
           Send
         </Button>
+        <IdeaManagementTool ideas={ideas} />
       </VStack>
     </Container>
   );
