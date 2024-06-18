@@ -46,7 +46,7 @@ const Index = () => {
           ))}
         </Box>
         <Input
-          placeholder="Type your message..."
+          placeholder="describe your idea"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
